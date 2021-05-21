@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
+      layout:decorate="~{layouts/dashboard-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{dashboard}">Dashboard</title>
+    <!-- PLUGINS STYLES-->
+
+    <!-- THEME STYLES-->
+    <link th:href="@{/css/main.min.css}" rel="stylesheet"/>
+
+    <!-- PAGE LEVEL STYLES-->
+
+</head>
+<body>
+<div layout:fragment="content" class="page-content fade-in-up">
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="ibox bg-success color-white widget-stat">
+                <div class="ibox-body">
+                    <h2 class="m-b-5 font-strong" th:text="${totalSentences}">10000</h2>
+                    <div class="m-b-5">CÂU</div><i class="ti-shopping-cart widget-stat-icon"></i>
+                    <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="ibox bg-info color-white widget-stat">
+                <div class="ibox-body">
+                    <h2 class="m-b-5 font-strong" th:text="${totalVocabularies}">920</h2>
+                    <div class="m-b-5">TỪ VỰNG</div><i class="ti-bar-chart widget-stat-icon"></i>
+                    <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="ibox bg-warning color-white widget-stat">
+                <div class="ibox-body">
+                    <h2 class="m-b-5 font-strong" th:text="${totalPhrases}">6000</h2>
+                    <div class="m-b-5">CỤM TỪ</div><i class="fa fa-money widget-stat-icon"></i>
+                    <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="ibox bg-danger color-white widget-stat">
+                <div class="ibox-body">
+                    <h2 class="m-b-5 font-strong" th:text="${totalUsers}">108</h2>
+                    <div class="m-b-5">NGƯỜI DÙNG</div><i class="ti-user widget-stat-icon"></i>
+                    <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .visitors-table tbody tr td:last-child {
+            display: flex;
+            align-items: center;
+        }
+
+        .visitors-table .progress {
+            flex: 1;
+        }
+
+        .visitors-table .progress-parcent {
+            text-align: right;
+            margin-left: 10px;
+        }
+    </style>
+</div>
+</body>
+</html>

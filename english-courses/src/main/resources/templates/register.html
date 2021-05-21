@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="#{register}">Register</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/pages/login.css}" rel="stylesheet">
+</head>
+<body>
+<form id="register-form" class="form-signin" th:action="@{/register}" method="POST">
+    <div class="text-center mb-4">
+        <img class="mb-4" th:src="@{/images/bootstrap-solid.svg}" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal" th:text="#{register}">Register</h1>
+    </div>
+
+    <div class="form-label-group">
+        <input type="text"
+               id="username"
+               class="form-control"
+               name="username"
+               th:placeholder="#{label.username}">
+        <label for="username" th:text="#{label.username}">Username</label>
+        <span class="invalid-feedback">Invalid username</span>
+    </div>
+
+    <div class="form-label-group">
+        <input type="email"
+               id="email"
+               class="form-control"
+               name="email"
+               th:placeholder="#{label.email}">
+        <label for="email" th:text="#{label.email}">Email</label>
+        <span class="invalid-feedback">Invalid email</span>
+    </div>
+
+    <div class="form-label-group">
+        <input type="password"
+               id="password"
+               class="form-control"
+               name="password"
+               th:placeholder="#{label.password}">
+        <label for="password" th:text="#{label.password}">Password</label>
+        <span class="invalid-feedback">Invalid password</span>
+    </div>
+
+    <div class="form-label-group">
+        <input type="password"
+               id="confirmPassword"
+               class="form-control"
+               name="confirmPassword"
+               th:placeholder="#{label.confirmPassword}">
+        <label for="confirmPassword" th:text="#{label.confirmPassword}">Confirm Password</label>
+        <span class="invalid-feedback">Invalid confirm password</span>
+    </div>
+
+    <button id="signUpButton" class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{button.register}">Sign
+        up
+    </button>
+    <p class="mt-5 mb-3 text-muted text-center"> &copy; 2019 - Self Learning</p>
+</form>
+
+<script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/popper.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+
+<script>
+    var $username;
+    var $email;
+    var $password;
+    var $confirmPassword;
+    var $signUpButton;
+
+    $(document).ready(function () {
+        $('#register-form span').hide();
+        $username = $('#username');
+        $email = $('#email');
+        $password = $('#password');
+        $confirmPassword = $('#confirmPassword');
+        $signUpButton = $('#signUpButton');
+
+        enableOrDisableSubmitButton();
+
+        $username.focus(processUsername)
+            .keyup(processUsername)
+            .keyup(enableOrDisableSubmitButton);
+
+        $email.focus(processEmail)
+            .keyup(processEmail)
+            .keyup(enableOrDisableSubmitButton);
+
+        $password.focus(processPassword)
+            .keyup(processConfirmPassword())
+            .keyup(enableOrDisableSubmitButton);
+
+        $confirmPassword.focus(processConfirmPassword)
+            .keyup(processConfirmPassword)
+            .keyup(enableOrDisableSubmitButton);
+
+        $signUpButton.click(submit);
+
+    });
+
+    function isUsernameValid() {
+        return $username.val().length > 0;
+    }
+
+    function isEmailValid() {
+        return $email.val().length > 0;
+    }
+
+    function isPasswordValid() {
+        return $password.val().length >= 6;
+    }
+
+    function isConfirmPasswordValid() {
+        return $confirmPassword.val() === $password.val();
+    }
+
+    function processUsername() {
+        if (!isUsernameValid())
+            $username.next().next().show();
+        else
+            $username.next().next().hide();
+    }
+
+    function processEmail() {
+        if (!isEmailValid())
+            $email.next().next().show();
+        else
+            $email.next().next().hide();
+    }
+
+    function processPassword() {
+        if (!isPasswordValid())
+            $password.next().next().show();
+        else
+            $password.next().next().hide();
+    }
+
+    function processConfirmPassword() {
+        if (!isConfirmPasswordValid()) {
+            $confirmPassword.next().next().text('Không khớp với mật khẩu');
+            $confirmPassword.next().next().show();
+        } else {
+            $confirmPassword.next().next().hide();
+        }
+    }
+
+    function submit(event) {
+        event.preventDefault();
+        var registration = {
+            username: $username.val(),
+            email: $email.val(),
+            password: $password.val(),
+            confirmPassword: $confirmPassword.val()
+        };
+        $.ajax({
+            method: 'POST',
+            data: JSON.stringify(registration),
+            dataType: 'application/json'
+        }).done(onSuccess).fail(onError);
+    }
+
+    function onSuccess(res) {
+        console.log(res);
+    }
+
+    function onError() {
+
+    }
+
+    function enableOrDisableSubmitButton() {
+        if (canSubmit()) {
+            $signUpButton.removeClass('disabled');
+        } else {
+            $signUpButton.addClass('disabled');
+        }
+    }
+
+    function canSubmit() {
+        return isUsernameValid() && isEmailValid() && isPasswordValid() && isConfirmPasswordValid();
+    }
+
+</script>
+
+</body>
+</html>

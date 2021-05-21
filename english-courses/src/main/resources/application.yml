@@ -1,0 +1,50 @@
+sql:
+  host: localhost
+  port: 3306
+  name: self_learning
+  username: project2
+  password: 123
+  params: useSSL=false
+  url: jdbc:mysql://${sql.host}:${sql.port}/${sql.name}?${sql.params}
+nosql:
+  elastichsearch:
+    cluster-nodes: localhost:9300
+mail:
+  username: manhnd.yoshi@gmail.com
+  password: Manh1234
+base-path: /Users/manhnd/Data/English/TAGT360
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${sql.url}
+    username: ${sql.username}
+    password: ${sql.password}
+  data:
+    elasticsearch:
+      cluster-name: self_learning
+      cluster-nodes: ${nosql.elastichsearch.cluster-nodes}
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate.ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        enable_lazy_load_no_trans: true
+  mail:
+    protocol: smtp
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail.username}
+    password: ${mail.password}
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  thymeleaf:
+    cache: false
+

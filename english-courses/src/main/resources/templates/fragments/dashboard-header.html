@@ -1,0 +1,62 @@
+<!--  START HEADER -->
+<header xmlns:th="" xml:sec="" th:fragment="header" class="header">
+    <div class="page-brand">
+        <a class="link" th:href="@{/}">
+			<span class="brand">
+				Self
+				<span class="brand-tip">Learning</span>
+			</span>
+            <span class="brand-mini">SL</span>
+        </a>
+    </div>
+    <div class="flexbox flex-1">
+        <!-- START TOP-LEFT TOOLBAR-->
+        <ul class="nav navbar-toolbar">
+            <li>
+                <a class="nav-link sidebar-toggler js-sidebar-toggler">
+                    <i class="ti-menu"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- END TOP-LEFT TOOLBAR-->
+        <!-- START TOP-RIGHT TOOLBAR-->
+        <ul class="nav navbar-toolbar">
+            <li class="dropdown dropdown-user">
+                <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
+                    <img th:src="@{/images/admin.png}"/>
+                    <span sec:authentication="name">User name</span>
+                    <i class="fa fa-angle-down m-l-5"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a class="dropdown-item" href="profile.html">
+                            <i class="fa fa-user"></i>
+                            Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="profile.html">
+                            <i class="fa fa-cog"></i>
+                            Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:;">
+                            <i class="fa fa-support"></i>
+                            Support
+                        </a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" th:href="@{/logout}">
+                            <i class="fa fa-power-off"></i>
+                            Đăng xuất
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- END TOP-RIGHT TOOLBAR-->
+    </div>
+</header>
+<!--  END HEADER -->

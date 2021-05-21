@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
+      layout:decorate="~{layouts/dashboard-layout}">
+<head>
+    <title th:text="#{vocabulary-management}">Danh sách từ vựng</title>
+    <!-- PLUGINS STYLES-->
+
+    <!-- THEME STYLES-->
+    <link th:href="@{/css/main.min.css}" rel="stylesheet"/>
+
+    <!-- PAGE LEVEL STYLES-->
+
+</head>
+
+<body>
+<div layout:fragment="content" class="page-content fade-in-up">
+    <div class="ibox">
+        <div class="ibox-head">
+            <div class="ibox-title">Danh sách từ vựng</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse">
+                    <i class="fa fa-minus"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <div class="input-group"><input id="search-input" type="text" class="form-control" placeholder="Tìm kiếm"/>
+                <button id="search-button" class="btn btn-success">Tìm kiếm</button>
+            </div>
+            <div class="my-3"></div>
+            <table id="vocabulary-table" class="table table-sm table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Từ</th>
+                    <th>Từ loại</th>
+                    <th>Nghĩa</th>
+                    <th>Mô tả</th>
+                    <th>Tiếng</th>
+                    <th>
+                        <button class="btn btn-sm btn-block btn-success">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <nav id="pagination-navigator"></nav>
+        </div>
+        <audio id="audioPlayer"></audio>
+    </div>
+</div>
+<th:block layout:fragment="page-level-scripts">
+    <!-- PAGE LEVEL SCRIPTS-->
+    <script th:src="@{/js/service/service.js}"></script>
+    <script th:src="@{/js/pages/vocabulary.js}"></script>
+</th:block>
+</body>
+</html>

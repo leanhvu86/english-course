@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
+      layout:decorate="~{layouts/common-layout}">
+<head>
+    <title>Chi tiết bài học</title>
+</head>
+<body>
+<main layout:fragment="main-container">
+    <div class="container mt-5 mb-5">
+        <div class="card">
+            <h5 class="card-header">
+                <a th:href="@{/courses/__${courseId}__}" style="text-decoration: none" class="text-dark">
+                    <i class="fa fa-home"></i>
+                </a>
+                <i class="fa fa-caret-right"></i>
+                <a th:href="@{/courses/__${courseId}__/lessons/__${lessonId}__}"
+                   th:text="|Bài ${lesson.orderNumber}|" style="text-decoration: none" class="text-dark"></a>
+            </h5>
+            <div class="card-body">
+                <h5 class="card-title">Các học phần chính</h5>
+                <span th:each="lessonModule : ${lessonModules}">
+                    <a class="btn btn-primary"
+                       th:href="@{/courses/__${courseId}__/lessons/__${lessonId}__/modules/__${lessonModule.id}__}"
+                       th:text="${lessonModule.module.name}">
+                    </a>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>

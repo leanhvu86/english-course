@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
+    <!-- GLOBAL MAINLY STYLES-->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/themify-icons.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <nav th:replace="~{fragments/common-navbar :: navbar}"></nav>
+</header>
+<main layout:fragment="main-container"></main>
+<footer></footer>
+<script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/popper.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+<th:block layout:fragment="page-scripts">
+    <!--PAGE SCRIPT HERE-->
+</th:block>
+</body>
+</html>

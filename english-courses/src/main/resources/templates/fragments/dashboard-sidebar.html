@@ -1,0 +1,84 @@
+<!-- START SIDEBAR-->
+<nav xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar" class="page-sidebar" id="sidebar">
+	<div id="sidebar-collapse">
+		<div class="admin-block d-flex">
+			<div>
+				<img th:src="@{/images/admin.png}" alt="Avatar" width="45px" />
+			</div>
+			<div class="admin-info">
+				<div class="font-strong">Manh Nguyen</div>
+				<small>Administrator</small>
+			</div>
+		</div>
+		<ul class="side-menu metismenu">
+			<li>
+				<!--/*@thymesVar id="dashboard" type="java.lang.Boolean"*/-->
+				<a th:classappend="${dashboard} ? 'active'" th:href="@{/admin/dashboard}">
+					<i class="sidebar-item-icon fa fa-th-large"></i>
+					<span class="nav-label">Dashboard</span>
+				</a>
+			</li>
+			<li class="heading">Tài khoản</li>
+			<li>
+				<!--/*@thymesVar id="userManagement" type="java.lang.Boolean"*/-->
+				<a th:classappend="${userManagement} ? 'active'" th:href="@{/admin/management/users}">
+					<i class="sidebar-item-icon fa fa-bookmark"></i>
+					<span class="nav-label">Quản lý tài khoản</span>
+				</a>
+			</li>
+			<li class="heading">Danh mục</li>
+			<li>
+				<a href="javascript:void(0)">
+					<i class="sidebar-item-icon fa fa-book"></i>
+					<span class="nav-label">Quản lý danh mục</span>
+					<i class="fa fa-angle-left arrow"></i>
+				</a>
+				<!--/*@thymesVar id="categories" type="java.lang.Boolean"*/-->
+				<ul class="nav-2-level collapse" th:classappend="${categories} ? 'in'">
+					<li>
+						<!--/*@thymesVar id="sentenceManagement" type="java.lang.Boolean"*/-->
+						<a th:classappend="${sentenceManagement} ? 'active'"
+						   th:href="@{/admin/management/sentences}">Câu</a>
+					</li>
+					<li>
+						<!--/*@thymesVar id="vocabularyManagement" type="java.lang.Boolean"*/-->
+						<a th:classappend="${vocabularyManagement} ? 'active'"
+						   th:href="@{/admin/management/vocabularies}">Từ vựng</a>
+					</li>
+					<li>
+						<!--/*@thymesVar id="phraseManagement" type="java.lang.Boolean"*/-->
+						<a th:classappend="${phraseManagement} ? 'active'"
+						   th:href="@{/admin/management/phrases}">Cụm từ</a>
+					</li>
+				</ul>
+			</li>
+			<li class="heading">Khóa học</li>
+			<li>
+				<a href="javascript:void(0)">
+					<i class="sidebar-item-icon fa fa-bookmark"></i>
+					<span class="nav-label">Quản lý khóa học</span>
+					<i class="fa fa-angle-left arrow"></i>
+				</a>
+				<!--/*@thymesVar id="courses" type="java.lang.Boolean"*/-->
+				<ul class="nav-2-level collapse" th:classappend="${courses} ? 'in'">
+					<li>
+						<!--/*@thymesVar id="courseManagement" type="java.lang.Boolean"*/-->
+						<a th:classappend="${courseManagement} ? 'active'"
+						   th:href="@{/admin/management/courses}">Khoá học</a>
+					</li>
+					<li>
+						<!--/*@thymesVar id="lessonManagement" type="java.lang.Boolean"*/-->
+						<a th:classappend="${lessonManagement} ? 'active'"
+						   th:href="@{/admin/management/lessons}">Bài học</a>
+					</li>
+					<li>
+						<!--/*@thymesVar id="moduleManagement" type="java.lang.Boolean"*/-->
+						<a th:classappend="${moduleManagement} ? 'active'"
+						   th:href="@{/admin/management/modules}">Học phần</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</nav>
+<!-- END SIDEBAR-->

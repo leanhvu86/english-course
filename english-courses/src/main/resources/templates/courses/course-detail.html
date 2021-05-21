@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
+      layout:decorate="~{layouts/common-layout}">
+<head>
+    <title>Chi tiet khoa hoc</title>
+</head>
+<body>
+<main layout:fragment="main-container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4" th:text="${course.name}">Fluid jumbotron</h1>
+            <p class="lead" th:text="${course.description}">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        </div>
+    </div>
+    <div class="container">
+        <span th:each="lesson : ${lessons}">
+            <a th:href="@{/courses/__${course.id}__/lessons/__${lesson.id}__}" class="btn btn-primary" th:text="${lesson.orderNumber}"></a>
+        </span>
+    </div>
+</main>
+</body>
+</html>

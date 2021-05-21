@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
+      layout:decorate="~{layouts/dashboard-layout}">
+<head>
+    <title th:text="#{sentence-management}">Danh sách câu</title>
+    <!-- PLUGINS STYLES-->
+
+    <!-- THEME STYLES-->
+    <link th:href="@{/css/main.min.css}" rel="stylesheet"/>
+
+    <!-- PAGE LEVEL STYLES-->
+
+</head>
+
+<body>
+<div layout:fragment="content" class="page-content fade-in-up">
+    <div class="ibox">
+        <div class="ibox-head">
+            <div class="ibox-title">Danh sách câu</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse">
+                    <i class="fa fa-minus"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <div class="input-group">
+                <input id="search-input" type="text" class="form-control" placeholder="Tìm kiếm"/>
+                <button id="search-button" class="btn btn-success"><i class="fa fa-search"></i> Tìm kiếm</button>
+            </div>
+
+            <div class="mt-3 mb-1">
+                <button class="btn btn btn-primary bg-ebony" id="sentence-add-button" title="Thêm câu">
+                    <i class="fa fa-plus"></i> <span>Thêm câu</span>
+                </button>
+            </div>
+
+            <div class="table-responsive">
+                <table id="sentence-table" class="table table-sm table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="align-middle">#</th>
+                        <th scope="col" class="align-middle">Câu</th>
+                        <th scope="col" class="align-middle">IPA</th>
+                        <th scope="col" class="align-middle">Nghĩa</th>
+                        <th scope="col" class="align-middle">Tiếng</th>
+                        <th scope="col" class="align-middle">Thao tác</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <nav id="pagination-navigator">
+            </nav>
+        </div>
+        <audio id="audioPlayer"></audio>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="sentence-modal" tabindex="-1" role="dialog" aria-labelledby="sentence-modal-title"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-ebony text-light">
+                    <h5 class="modal-title" id="sentence-modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-light">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" id="id" name="id" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Câu</label>
+                        <input type="text" id="text" name="text" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="ipa">Ipa</label>
+                        <input type="text" id="ipa" name="ipa" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meaning">Nghĩa</label>
+                        <input type="text" id="meaning" name="meaning" class="form-control"/>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meaning">Âm thanh</label>
+                        <div>
+                            <input type="file" id="audioFile" name="audioFile"/>
+                            <input type="hidden" id="audioPath" name="audioPath"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        <i class="fa fa-close"></i> <span>Đóng</span>
+                    </button>
+                    <button type="button" class="btn btn-danger" id="sentence-save-button">
+                        <i class="fa fa-save"></i> <span>Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<th:block layout:fragment="page-level-scripts">
+    <!-- PAGE LEVEL SCRIPTS-->
+    <script th:src="@{/js/service/service.js}"></script>
+    <script th:src="@{/js/pages/sentence.js}"></script>
+</th:block>
+</body>
+</html>

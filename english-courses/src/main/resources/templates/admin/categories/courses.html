@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
+      layout:decorate="~{layouts/dashboard-layout}">
+<head>
+    <title th:text="#{course-management}">Danh sách khoá học</title>
+    <!-- PLUGINS STYLES-->
+    <!-- THEME STYLES-->
+    <link th:href="@{/css/main.min.css}" rel="stylesheet"/>
+    <!-- PAGE LEVEL STYLES-->
+</head>
+
+<body>
+<div layout:fragment="content" class="page-content fade-in-up">
+    <div class="ibox">
+        <div class="ibox-head">
+            <div class="ibox-title">Khóa học</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse">
+                    <i class="fa fa-minus"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <div id="alert-container"></div>
+            <div class="my-2">
+                <button class="btn btn-primary" id="create-button">Tạo khóa học</button>
+            </div>
+            <table class="table table-sm table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên khoá học</th>
+                    <th>Mô tả</th>
+                    <th style="width: 100px">Hành động</th>
+                </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+            <nav id="pagination-navigator">
+            </nav>
+        </div>
+    </div>
+
+    <div class="modal fade" id="course-modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="course-form">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Title</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div id="modal-alert"></div>
+                            <input id="id" name="id" type="hidden" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Tên khóa học</label>
+                            <input id="name" name="name" type="text" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Mô tả</label>
+                            <textarea id="description" name="description" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">
+                            <i class="fa fa-close"></i> <span>Đóng</span>
+                        </button>
+                        <button id="save-button" type="button" class="btn btn-danger">
+                            <i class="fa fa-save"></i> <span>Lưu</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="lesson-modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="lesson-form">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Title</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div id="lesson-alert"></div>
+                            <input id="courseId" name="courseId" type="hidden" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Tên khóa học</label>
+                            <input id="courseName" class="form-control" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Số thứ tự bài học</label>
+                            <input id="orderNumber" name="orderNumber" type="number" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">
+                            <i class="fa fa-close"></i> <span>Đóng</span>
+                        </button>
+                        <button id="save-lesson-button" type="button" class="btn btn-danger">
+                            <i class="fa fa-save"></i> <span>Lưu</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="delete-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Bạn có muốn xóa khóa học này không
+                    </h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                        <i class="fa fa-close"></i> <span>Đóng</span>
+                    </button>
+                    <button id="delete-button" type="button" class="btn btn-danger">
+                        <i class="fa fa-remove"></i> <span>Đồng ý</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<th:block layout:fragment="page-level-scripts">
+    <!-- PAGE LEVEL SCRIPTS-->
+    <script th:src="@{/js/service/service.js}"></script>
+    <script th:src="@{/js/pages/course.js}"></script>
+</th:block>
+</body>
+</html>

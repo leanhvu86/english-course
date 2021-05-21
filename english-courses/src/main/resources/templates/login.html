@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="#{login}">Login</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/themify-icons.css}" rel="stylesheet"/>
+    <link th:href="@{/css/pages/login.css}" rel="stylesheet">
+</head>
+<body>
+<form class="form-signin" th:action="@{/login}" method="post">
+    <div class="text-center mb-4">
+        <img class="mb-4" th:src="@{/images/bootstrap-solid.svg}" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal" th:text="#{login}">Login</h1>
+    </div>
+
+    <div class="form-group">
+        <div th:if="${param.errors}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span>Sai tài khoản hoặc mật khẩu</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <div class="form-label-group">
+        <input type="text"
+               id="username"
+               class="form-control"
+               name="username"
+               th:placeholder="#{label.usernameOrEmailAddress}"
+               required
+               autofocus>
+        <label for="username" th:text="#{label.usernameOrEmailAddress}">Email</label>
+    </div>
+
+    <div class="form-label-group">
+        <input type="password"
+               id="inputPassword"
+               class="form-control"
+               name="password"
+               th:placeholder="#{label.password}"
+               required>
+        <label for="inputPassword" th:text="#{label.password}">Password</label>
+    </div>
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="remember-me"> <span th:text="#{label.remember}">Remember me</span>
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{button.login}">Sign in</button>
+    <p class="mt-5 mb-3 text-muted text-center"> Copyright &copy; 2019 - Self Learning</p>
+</form>
+<script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/popper.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+</body>
+</html>

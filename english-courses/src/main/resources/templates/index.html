@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
+      layout:decorate="~{layouts/common-layout}">
+<head>
+    <title>Trang chủ</title>
+    <link rel="stylesheet" th:href="@{/css/pages/autocomplete.css}">
+</head>
+<body>
+<main layout:fragment="main-container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Fluid jumbotron</h1>
+            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card-columns">
+            <div class="card" th:each="course : ${courses}">
+                <div class="card-header" th:text="${course.name}">Course name</div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${course.name}">Special title treatment</h5>
+                    <p class="card-text" th:text="${course.description}">With supporting text below as a natural lead-in
+                        to additional content.</p>
+                    <a th:href="@{/courses/__${course.id}__}" class="btn btn-primary">Learn now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://wwww.thymeleaf.org"
+      xmlns:layout="https://github.com/ultraq/thymeleaf-layout-dialect"
+      layout:decorate="~{layouts/common-layout}">
+<head>
+    <title>Luyện từ vựng</title>
+</head>
+<body>
+<main layout:fragment="main-container">
+    <div class="container mt-5 mb-5">
+        <div class="card">
+            <h5 class="card-header">
+                <a style="text-decoration: none" class="text-dark"
+                   th:href="@{/courses/__${vocabularyLesson.lessonModule.lesson.course.id}__}">
+                    <i class="fa fa-home"></i>
+                </a>
+                <i class="fa fa-caret-right"></i>
+                <a style="text-decoration: none" class="text-dark"
+                   th:href="@{/courses/__${vocabularyLesson.lessonModule.lesson.course.id}__/lessons/__${vocabularyLesson.lessonModule.lesson.id}__}"
+                   th:text="|Bài ${vocabularyLesson.lessonModule.lesson.orderNumber}|">Bài 1</a>
+                <i class="fa fa-caret-right"></i>
+                <span>Luyện từ vựng</span>
+            </h5>
+            <div class="card-body">
+                <div th:each="vld : ${vocabularyLesson.vocabularyLessonDetails}">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <img class="img-fluid" th:src="@{/api/v1/vocabularies/__${vld.vocabulary.id}__/image}"
+                                 alt="Image"/>
+                        </div>
+                        <div class="col-md-9">
+                            <div>
+                                <a th:href="@{/api/v1/vocabularies/__${vld.vocabulary.id}__/audio}"
+                                   onclick="return playAudio(this);">
+                                    <i class="fa fa-volume-up"></i>
+                                </a>
+                                <strong th:text="${vld.vocabulary.word.text}" class="text-warning"
+                                        style="font-size: 1.8rem"></strong>
+                                <span th:text="${vld.vocabulary.word.ipa}"></span>
+                            </div>
+                            <div th:text="${vld.vocabulary.meaning}"></div>
+                            <div>
+                                (<strong th:text="${vld.vocabulary.wordClass.name}" class="text-warning"></strong>)
+                                <span th:text="${vld.vocabulary.description}"></span>
+                            </div>
+                            <hr>
+                            <div>
+                                <a th:href="@{/api/v1/sentences/__${vld.sentence.id}__/audio}"
+                                   onclick="return playAudio(this);">
+                                    <i class="fa fa-volume-up"></i>
+                                </a>
+                                <span th:text="${vld.sentence.text}" class="text-success"></span>
+                            </div>
+                            <div th:text="${vld.sentence.meaning}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" src=""></audio>
+
+</main>
+<th:block layout:fragment="page-scripts">
+    <!--PAGE SCRIPT HERE-->
+    <script>
+        function playAudio(a) {
+            var url = a.href;
+            $.ajax({
+                method: 'GET',
+                url: url,
+                xhr: function () {
+                    var xhr = new XMLHttpRequest();
+                    xhr.responseType = 'blob';
+                    return xhr;
+                },
+                success: function (response) {
+                    var audio = document.querySelector("#audioPlayer");
+                    audio.addEventListener('playing', function (event) {
+                        console.log("playing");
+                    });
+                    audio.addEventListener('ended', function (event) {
+                        console.log("ended");
+                    });
+                    var URL = window.URL || window.webkitURL;
+                    audio.src = URL.createObjectURL(response);
+                    audio.play();
+                }
+            });
+            return false;
+        }
+    </script>
+</th:block>
+</body>
+</html>
